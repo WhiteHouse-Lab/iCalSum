@@ -34,5 +34,5 @@ jobs:
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
           git add calendar.ics
-          git commit -m 'Update calendar.ics'
+          git commit -m 'Update DownTownSkagen_SourceAndTime.ics'
           git push
