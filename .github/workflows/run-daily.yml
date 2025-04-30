@@ -28,3 +28,11 @@ jobs:
         with:
           name: iCal-Output
           path: DownTownSkagen_SourceAndTime.ics
+
+      - name: Commit and Push Generated .ics
+        run: |
+          git config --global user.name 'github-actions'
+          git config --global user.email 'github-actions@github.com'
+          git add calendar.ics
+          git commit -m 'Update calendar.ics'
+          git push
