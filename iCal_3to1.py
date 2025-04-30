@@ -2,6 +2,7 @@ import requests
 from ics import Calendar, Event
 from datetime import datetime, time, timedelta, timezone
 import pytz
+import os
 
 # Use your local timezone
 local_tz = pytz.timezone("Europe/Copenhagen")
@@ -95,7 +96,7 @@ for start_date, end_date, source in booked_periods:
     calendar2.events.add(event)
 
 # Save to C:\temp\
-output_path = r"C:\temp\DownTownSkagen_SourceAndTime.ics"
+output_path = os.path.join(os.getcwd(), "DownTownSkagen_SourceAndTime.ics")
 with open(output_path, "w", encoding="utf-8") as f:
     f.writelines(calendar2)
 
