@@ -24,7 +24,7 @@ jobs:
         run: python iCal_3to1.py
 
       - name: Upload generated .ics file
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: iCal-Output
           path: DownTownSkagen_SourceAndTime.ics
