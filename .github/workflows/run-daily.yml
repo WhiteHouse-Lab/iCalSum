@@ -27,6 +27,12 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: iCal-Output
+          path: DownTownSkagen_All_Sources.ics
+
+      - name: Upload generated .ics file
+        uses: actions/upload-artifact@v4
+        with:
+          name: iCal-Output
           path: DownTownSkagen_SourceAndTime.ics
 
       - name: Commit and Push Generated .ics
