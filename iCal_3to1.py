@@ -10,15 +10,12 @@ local_tz = pytz.timezone("Europe/Copenhagen")
 
 # Calendar URLs and their labels
 calendar_sources = {
-    "https://landfolk.com/l/620bc23f/calendar.ics?t=TzV2uz9oxrTZuwTVNnbWebU3": "Landfolk",
-    "https://www.campaya.dk/calendar/ical/147226.ics?s=a6959ef6208c4db09b6a9fab9c2f9eae": "Campaya",
-    "https://www.airbnb.dk/calendar/ical/7444875.ics?s=684d2119066004d0ea92541480d27e00": "Airbnb"
+    "https://landfolk.com/l/620bc23f/calendar.ics?t=TzV2uz9oxrTZuwTVNnbWebU3": "Landfolk, Penthouse",
+    "https://www.campaya.dk/calendar/ical/147226.ics?s=a6959ef6208c4db09b6a9fab9c2f9eae": "Campaya, Penthouse",
+    "https://www.airbnb.dk/calendar/ical/7444875.ics?s=684d2119066004d0ea92541480d27e00": "Airbnb, Penthouse",
+    "https://ical.booking.com/v1/export?t=94fb4af9-132f-4307-a7b8-f07eb8691130": "Booking, Lejl. 5",
+    "https://www.airbnb.dk/calendar/ical/1391100679122939389.ics?s=f2377d8e9bbde9df063061bf069f32c5": "Airbnb, Lejl. 5"
 }
-
-
-##calendar_sources = {"https://www.airbnb.dk/calendar/ical/7444875.ics?s=684d2119066004d0ea92541480d27e00": "Airbnb"
-##}
-
 
 # Define the time limit: 2 months ago
 cutoff_date = datetime.now(timezone.utc) - timedelta(days=60)
@@ -55,27 +52,20 @@ for start, end, source in sorted(booked_periods):
 #Standard full Day Bookings
 
 
-##calendar = Calendar()
-##
-##for start, end, source in booked_periods:
-##    e = Event()
-##    e.name = f"Booked ({source})"
-##    e.begin = start
-##    e.end = end
-##    e.make_all_day()
-##    calendar.events.add(e)
-##
-### Save the calendar to a file (or return it as string for hosting)
-##with open("bookings.ics", "w") as f:
-##    f.writelines(calendar)
-##
-##
-### Save the calendar to C:\temp\bookings.ics
-##output_path = r"C:\temp\bookings.ics"
-##with open(output_path, "w", encoding="utf-8") as f:
-##    f.writelines(calendar)
-##
-##print(f".ics file saved to: {output_path}")
+calendar = Calendar()
+
+for start, end, source in booked_periods:
+    e = Event()
+    e.name = f"Optaget ({source})"
+    e.begin = start
+    e.end = end
+    e.make_all_day()
+    calendar.events.add(e)
+
+# Save to root
+output_path = os.path.join(os.getcwd(), "DownTownSkagen_All_Sources.ics")
+with open(output_path, "w", encoding="utf-8") as f:
+    f.writelines(calendar)
 
 
 
