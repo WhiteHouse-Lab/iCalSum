@@ -42,5 +42,8 @@ jobs:
           git add DownTownSkagen_SourceAndTime.ics
           git commit -m 'Update DownTownSkagen_SourceAndTime.ics' || echo "No changes to commit"
           git push
+          git add DownTownSkagen_All_Sources.ics
+          git commit -m 'DownTownSkagen_All_Sources.ics' || echo "No changes to commit"
+          git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
