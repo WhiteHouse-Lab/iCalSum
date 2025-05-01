@@ -23,16 +23,16 @@ jobs:
       - name: Run iCal script
         run: python iCal_3to1.py
 
-      - name: Upload generated .ics file
+      - name: Upload generated .ics file (All Sources)
         uses: actions/upload-artifact@v4
         with:
-          name: iCal-Output
+          name: iCal-Output-All-Sources
           path: DownTownSkagen_All_Sources.ics
 
-      - name: Upload generated .ics file
+      - name: Upload generated .ics file (Source and Time)
         uses: actions/upload-artifact@v4
         with:
-          name: iCal-Output
+          name: iCal-Output-Source-And-Time
           path: DownTownSkagen_SourceAndTime.ics
 
       - name: Commit and Push Generated .ics
