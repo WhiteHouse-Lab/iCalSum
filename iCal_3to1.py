@@ -71,7 +71,11 @@ Booked_PH = Calendar()
 
 for event in booked_periods_PH:
     e = Event()
-    e.name = f"Optaget ({event['label']})"
+    # Use "Privat Booking" if summary contains "Airbnb (Not available)"
+    if "Airbnb (Not available)" in event['summary']:
+        e.name = "Privat Booking"
+    else:
+        e.name = f"Optaget ({event['label']})"
     e.begin = event['start']
     e.end = event['end'] - timedelta(days=1)  # Subtract one day from end date
     e.make_all_day()  # Ensure it's a full-day event
@@ -87,7 +91,11 @@ Booked_L5 = Calendar()
 
 for event in booked_periods_L5:
     e = Event()
-    e.name = f"Optaget ({event['label']})"
+    # Use "Privat Booking" if summary contains "Airbnb (Not available)"
+    if "Airbnb (Not available)" in event['summary']:
+        e.name = "Privat Booking"
+    else:
+        e.name = f"Optaget ({event['label']})"
     e.begin = event['start']
     e.end = event['end'] - timedelta(days=1)  # Subtract one day from end date
     e.make_all_day()  # Ensure it's a full-day event
