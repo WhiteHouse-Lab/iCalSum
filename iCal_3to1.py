@@ -107,3 +107,38 @@ with open(output_path, "w", encoding="utf-8") as f:
     f.writelines(Booked_L5)
 
 print(f".ics file with Bookings saved to: {output_path}")
+
+
+# --- Additional Public_PH.ics ---
+Public_PH = Calendar()
+
+for event in booked_periods_PH:
+    e = Event()
+    e.name = "Penthouse Optaget"  # Set the name for public visibility
+    e.begin = event['start']
+    e.end = event['end'] - timedelta(days=1)  # Subtract one day from end date
+    e.make_all_day()  # Ensure it's a full-day event
+    Public_PH.events.add(e)
+
+# Save Public_PH.ics to root
+public_ph_path = os.path.join(os.getcwd(), "Public_PH.ics")
+with open(public_ph_path, "w", encoding="utf-8") as f:
+    f.writelines(Public_PH)
+
+# --- Additional Public_L5.ics ---
+Public_L5 = Calendar()
+
+for event in booked_periods_L5:
+    e = Event()
+    e.name = "Pakhus Optaget"  # Set the name for public visibility
+    e.begin = event['start']
+    e.end = event['end'] - timedelta(days=1)  # Subtract one day from end date
+    e.make_all_day()  # Ensure it's a full-day event
+    Public_L5.events.add(e)
+
+# Save Public_L5.ics to root
+public_l5_path = os.path.join(os.getcwd(), "Public_L5.ics")
+with open(public_l5_path, "w", encoding="utf-8") as f:
+    f.writelines(Public_L5)
+
+print(f"Public .ics files saved to: {public_ph_path} and {public_l5_path}")
