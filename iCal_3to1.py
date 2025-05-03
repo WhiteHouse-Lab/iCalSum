@@ -75,7 +75,7 @@ for start, end, source in booked_periods_PH:
     e.begin = start
     e.end = end
     e.make_all_day()
-    calendar.events.add(e)
+    Booked_PH.events.add(e)
 
 # Save to root
 output_path = os.path.join(os.getcwd(), "Booked_PH.ics")
@@ -93,7 +93,7 @@ for start, end, source in booked_periods_L5:
     e.begin = start
     e.end = end
     e.make_all_day()
-    calendar.events.add(e)
+    Booked_L5.events.add(e)
 
 # Save to root
 output_path = os.path.join(os.getcwd(), "Booked_L5.ics")
