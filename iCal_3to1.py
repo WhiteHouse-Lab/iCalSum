@@ -69,7 +69,7 @@ for start, end, source in sorted(booked_periods_PH):
 
 Booked_PH = Calendar()
 
-for start, end, source in booked_periods:
+for start, end, source in booked_periods_PH:
     e = Event()
     e.name = f"Optaget ({source})"
     e.begin = start
@@ -87,7 +87,7 @@ with open(output_path, "w", encoding="utf-8") as f:
 
 Booked_L5 = Calendar()
 
-for start, end, source in booked_periods:
+for start, end, source in booked_periods_L5:
     e = Event()
     e.name = f"Optaget ({source})"
     e.begin = start
