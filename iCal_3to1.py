@@ -1,12 +1,11 @@
 import requests
 from ics import Calendar, Event
-from datetime import datetime, time, timedelta, timezone
+from datetime import datetime, timedelta, timezone
 import pytz
 import os
 
 # Use your local timezone
 local_tz = pytz.timezone("Europe/Copenhagen")
-
 
 # Penthouse - Calendar URLs and their labels (PH)
 ical_sources_PH = {
@@ -24,14 +23,20 @@ ical_sources_L5 = {
 # Define the time limit: 2 months ago
 cutoff_date = datetime.now(timezone.utc) - timedelta(days=60)
 
-
-# Function to fetch and parse events
+# Function to fetch and parse events (updated to include summary)
 def fetch_events(url, label):
     response = requests.get(url)
     response.raise_for_status()
     calendar = Calendar(response.text)
-    return [(event.begin.date(), event.end.date(), label) for event in calendar.events if event.end and event.end > cutoff_date]
-
+    return [
+        {
+            "start": event.begin.date(),
+            "end": event.end.date(),
+            "label": label,
+            "summary": event.name if event.name else "No Summary"
+        }
+        for event in calendar.events if event.end and event.end > cutoff_date
+    ]
 
 # Get dicts using Function above
 booked_periods_PH = []
@@ -51,30 +56,24 @@ for url, label in ical_sources_L5.items():
     except Exception as e:
         print(f"Error fetching from {url}: {e}")
 
-
 # --- Output 1: Simple List booked_periods_L5 ---
 print("\n=== booked_periods_L5 (Simple List) ===")
-for start, end, _ in sorted(booked_periods_L5):
-    print(f"Booked: {start} to {end}")
+for event in sorted(booked_periods_L5, key=lambda x: x["start"]):
+    print(f"Booked: {event['start']} to {event['end']}")
 
 # --- Output 2: With Source Info booked_periods_PH ---
 print("\n=== booked_periods_PH (With Source) ===")
-for start, end, source in sorted(booked_periods_PH):
-    print(f"{source}: {start} to {end}")
+for event in sorted(booked_periods_PH, key=lambda x: x["start"]):
+    print(f"{event['label']}: {event['start']} to {event['end']} (Summary: {event['summary']})")
 
-
-#--------------------------------------
-
-#Standard full Day Bookings Penthouse
-
+# Standard full Day Bookings Penthouse
 Booked_PH = Calendar()
 
-for start, end, source in booked_periods_PH:
+for event in booked_periods_PH:
     e = Event()
-    e.name = f"Optaget ({source})"
-    e.begin = start
-    e.end = end
-    e.make_all_day()
+    e.name = f"Optaget ({event['label']})"
+    e.begin = event['start']
+    e.end = event['end']  # Ensure the end date remains unchanged
     Booked_PH.events.add(e)
 
 # Save to root
@@ -82,26 +81,19 @@ output_path = os.path.join(os.getcwd(), "Booked_PH.ics")
 with open(output_path, "w", encoding="utf-8") as f:
     f.writelines(Booked_PH)
 
-
-#Standard full Day L5
-
+# Standard full Day L5
 Booked_L5 = Calendar()
 
-for start, end, source in booked_periods_L5:
+for event in booked_periods_L5:
     e = Event()
-    e.name = f"Optaget ({source})"
-    e.begin = start
-    e.end = end
-    e.make_all_day()
+    e.name = f"Optaget ({event['label']})"
+    e.begin = event['start']
+    e.end = event['end']  # Ensure the end date remains unchanged
     Booked_L5.events.add(e)
 
 # Save to root
 output_path = os.path.join(os.getcwd(), "Booked_L5.ics")
 with open(output_path, "w", encoding="utf-8") as f:
     f.writelines(Booked_L5)
-    
+
 print(f".ics file with Bookings saved to: {output_path}")
-
-#---------------------------------------------
-
-
