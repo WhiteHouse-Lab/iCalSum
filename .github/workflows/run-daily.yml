@@ -23,27 +23,27 @@ jobs:
       - name: Run iCal script
         run: python iCal_3to1.py
 
-      - name: Upload generated .ics file (All Sources)
+      - name: Upload generated .ics file (L5)
         uses: actions/upload-artifact@v4
         with:
-          name: iCal-Output-All-Sources
-          path: DownTownSkagen_All_Sources.ics
+          name: iCal-Output-L5
+          path: Booked_L5.ics
 
-      - name: Upload generated .ics file (Source and Time)
+      - name: Upload generated .ics file (PH)
         uses: actions/upload-artifact@v4
         with:
-          name: iCal-Output-Source-And-Time
-          path: DownTownSkagen_SourceAndTime.ics
+          name: iCal-Output-PH
+          path: Booked_PH.ics
 
       - name: Commit and Push Generated .ics
         run: |
           git config --global user.name 'github-actions'
           git config --global user.email 'github-actions@github.com'
-          git add DownTownSkagen_SourceAndTime.ics
-          git commit -m 'Update DownTownSkagen_SourceAndTime.ics' || echo "No changes to commit"
+          git add Booked_L5.ics
+          git commit -m 'Booked_L5.ics' || echo "No changes to commit"
           git push
-          git add DownTownSkagen_All_Sources.ics
-          git commit -m 'DownTownSkagen_All_Sources.ics' || echo "No changes to commit"
+          git add Booked_PH.ics
+          git commit -m 'Booked_PH.ics' || echo "No changes to commit"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
