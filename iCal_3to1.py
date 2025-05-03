@@ -73,7 +73,8 @@ for event in booked_periods_PH:
     e = Event()
     e.name = f"Optaget ({event['label']})"
     e.begin = event['start']
-    e.end = event['end']  # Ensure the end date remains unchanged
+    e.end = event['end'] - timedelta(days=1)  # Subtract one day from end date
+    e.make_all_day()  # Ensure it's a full-day event
     Booked_PH.events.add(e)
 
 # Save to root
@@ -88,7 +89,8 @@ for event in booked_periods_L5:
     e = Event()
     e.name = f"Optaget ({event['label']})"
     e.begin = event['start']
-    e.end = event['end']  # Ensure the end date remains unchanged
+    e.end = event['end'] - timedelta(days=1)  # Subtract one day from end date
+    e.make_all_day()  # Ensure it's a full-day event
     Booked_L5.events.add(e)
 
 # Save to root
