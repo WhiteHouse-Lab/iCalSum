@@ -52,14 +52,14 @@ for url, label in ical_sources_L5.items():
         print(f"Error fetching from {url}: {e}")
 
 
-# --- Output 1: Simple List ---
-print("\n=== Booked Periods (Simple List) ===")
-for start, end, _ in sorted(booked_periods):
+# --- Output 1: Simple List booked_periods_L5 ---
+print("\n=== booked_periods_L5 (Simple List) ===")
+for start, end, _ in sorted(booked_periods_L5):
     print(f"Booked: {start} to {end}")
 
-# --- Output 2: With Source Info ---
-print("\n=== Booked Periods (With Source) ===")
-for start, end, source in sorted(booked_periods):
+# --- Output 2: With Source Info booked_periods_PH ---
+print("\n=== booked_periods_PH (With Source) ===")
+for start, end, source in sorted(booked_periods_PH):
     print(f"{source}: {start} to {end}")
 
 
