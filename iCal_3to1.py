@@ -73,7 +73,7 @@ for event in booked_periods_PH:
     e = Event()
     # Use "Privat Booking" if summary contains "Airbnb (Not available)"
     if "Airbnb (Not available)" in event['summary']:
-        e.name = "Privat Booking"
+        e.name = "Privat, Penthouse"
     else:
         e.name = f"Optaget ({event['label']})"
     e.begin = event['start']
@@ -93,7 +93,7 @@ for event in booked_periods_L5:
     e = Event()
     # Use "Privat Booking" if summary contains "Airbnb (Not available)"
     if "Airbnb (Not available)" in event['summary']:
-        e.name = "Privat Booking"
+        e.name = "Privat, Lejl 5"
     else:
         e.name = f"Optaget ({event['label']})"
     e.begin = event['start']
