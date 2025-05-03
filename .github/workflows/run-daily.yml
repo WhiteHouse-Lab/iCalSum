@@ -35,6 +35,18 @@ jobs:
           name: iCal-Output-PH
           path: Booked_PH.ics
 
+      - name: Upload generated .ics file (Public_PH.ics)
+        uses: actions/upload-artifact@v4
+        with:
+          name: iCal-public_Output-PH
+          path: Public_PH.ics
+
+      - name: Upload generated .ics file (Public_L5.ics)
+        uses: actions/upload-artifact@v4
+        with:
+          name: iCal-Public_Output-L5
+          path: Public_L5.ics
+
       - name: Commit and Push Generated .ics
         run: |
           git config --global user.name 'github-actions'
@@ -44,6 +56,12 @@ jobs:
           git push
           git add Booked_PH.ics
           git commit -m 'Booked_PH.ics' || echo "No changes to commit"
+          git push
+          git add Public_PH.ics
+          git commit -m 'Public_PH.ics' || echo "No changes to commit"
+          git push
+          git add Public_L5.ics
+          git commit -m 'Public_L5.ics' || echo "No changes to commit"
           git push
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
