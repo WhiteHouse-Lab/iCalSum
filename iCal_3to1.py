@@ -12,6 +12,7 @@ ical_sources_PH = {
     "https://landfolk.com/l/620bc23f/calendar.ics?t=TzV2uz9oxrTZuwTVNnbWebU3": "Landfolk, Penthouse",
     "https://www.campaya.dk/calendar/ical/147226.ics?s=a6959ef6208c4db09b6a9fab9c2f9eae": "Campaya, Penthouse",
     "https://www.airbnb.dk/calendar/ical/7444875.ics?s=684d2119066004d0ea92541480d27e00": "Airbnb, Penthouse",
+    "https://ical.booking.com/v1/export?t=b95518c7-3985-4924-86b0-8ab6cb97f0d2": "Booking, Penthouse"
 }
 
 # Lejlighed 5 - Calendar URLs and their labels (L5)
@@ -142,3 +143,4 @@ with open(public_l5_path, "w", encoding="utf-8") as f:
     f.writelines(Public_L5)
 
 print(f"Public .ics files saved to: {public_ph_path} and {public_l5_path}")
+
