@@ -18,7 +18,7 @@ ical_sources_PH = {
 # Lejlighed 5 - Calendar URLs and their labels (L5)
 ical_sources_L5 = {
     "https://ical.booking.com/v1/export?t=94fb4af9-132f-4307-a7b8-f07eb8691130": "Booking, Lejl. 5",
-    "https://www.airbnb.dk/calendar/ical/1391100679122939389.ics?s=f2377d8e9bbde9df063061bf069f32c5": "Airbnb, Lejl. 5"
+    "https://www.airbnb.dk/calendar/ical/1595511218529641558.ics?t=23f6984ead854b8d9765761bfcff4815": "Airbnb, Lejl. 5"
 }
 
 # Define the time limit: 2 months ago
@@ -143,4 +143,5 @@ with open(public_l5_path, "w", encoding="utf-8") as f:
     f.writelines(Public_L5)
 
 print(f"Public .ics files saved to: {public_ph_path} and {public_l5_path}")
+
 
