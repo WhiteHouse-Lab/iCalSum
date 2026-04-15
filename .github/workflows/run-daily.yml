@@ -3,22 +3,33 @@ name: Run iCal Script
 on:
   schedule:
     - cron: "0 */4 * * *" # Runs every 4 hours
-  workflow_dispatch:        # Allows manual trigger
+  workflow_dispatch:
+
+permissions:
+  contents: write
 
 jobs:
   run-script:
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: true
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: 3.9
+          python-version: "3.9"
+          cache: "pip"
 
       - name: Install dependencies
-        run: pip install requests ics pytz
+        run: |
+          python -m pip install --upgrade pip
+          pip install requests ics pytz
 
       - name: Run iCal script
         run: python iCal_3to1.py
@@ -47,21 +58,10 @@ jobs:
           name: iCal-Public_Output-L5
           path: Public_L5.ics
 
-      - name: Commit and Push Generated .ics
+      - name: Commit and push generated .ics files
         run: |
-          git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@github.com'
-          git add Booked_L5.ics
-          git commit -m 'Booked_L5.ics' || echo "No changes to commit"
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add Booked_L5.ics Booked_PH.ics Public_PH.ics Public_L5.ics
+          git commit -m "Update generated iCal files" || echo "No changes to commit"
           git push
-          git add Booked_PH.ics
-          git commit -m 'Booked_PH.ics' || echo "No changes to commit"
-          git push
-          git add Public_PH.ics
-          git commit -m 'Public_PH.ics' || echo "No changes to commit"
-          git push
-          git add Public_L5.ics
-          git commit -m 'Public_L5.ics' || echo "No changes to commit"
-          git push
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
