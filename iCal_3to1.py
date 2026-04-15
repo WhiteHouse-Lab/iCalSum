@@ -11,13 +11,13 @@ local_tz = pytz.timezone("Europe/Copenhagen")
 ical_sources_PH = {
     "https://landfolk.com/l/620bc23f/calendar.ics?t=TzV2uz9oxrTZuwTVNnbWebU3": "Landfolk, Penthouse",
     "https://www.campaya.dk/calendar/ical/147226.ics?s=a6959ef6208c4db09b6a9fab9c2f9eae": "Campaya, Penthouse",
-    "https://www.airbnb.dk/calendar/ical/7444875.ics?s=684d2119066004d0ea92541480d27e00": "Airbnb, Penthouse",
-    "https://ical.booking.com/v1/export?t=b95518c7-3985-4924-86b0-8ab6cb97f0d2": "Booking, Penthouse"
+    "https://www.airbnb.dk/calendar/ical/7444875.ics?t=d5b5af86f364471bb801c00420cdc378": "Airbnb, Penthouse",
+    "https://ical.booking.com/v1/export?t=e783995b-ef4e-4251-a322-38e7be310468": "Booking, Penthouse"
 }
 
 # Lejlighed 5 - Calendar URLs and their labels (L5)
 ical_sources_L5 = {
-    "https://ical.booking.com/v1/export?t=94fb4af9-132f-4307-a7b8-f07eb8691130": "Booking, Lejl. 5",
+    "https://ical.booking.com/v1/export?t=a026cda2-8c77-43df-bd39-c36683fa06c5": "Booking, Lejl. 5",
     "https://www.airbnb.dk/calendar/ical/1595511218529641558.ics?t=23f6984ead854b8d9765761bfcff4815": "Airbnb, Lejl. 5"
 }
 
