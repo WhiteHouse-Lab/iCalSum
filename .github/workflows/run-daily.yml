@@ -1,3 +1,4 @@
+
 name: Run iCal Script
 
 on:
@@ -10,26 +11,34 @@ permissions:
 
 jobs:
   run-script:
-    runs-on: ubuntu-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    runs-on: ubuntu-24.04
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: "3.9"
+          python-version: "3.11"
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
-          pip install requests ics pytz
+          python -m pip install requests ics pytz
 
       - name: Run iCal script
         run: python iCal_3to1.py
+
+      - name: Verify generated ICS files
+        run: |
+          for file in Booked_L5.ics Booked_PH.ics Public_PH.ics Public_L5.ics; do
+            if [ ! -f "$file" ]; then
+              echo "ERROR: Missing file $file"
+              exit 1
+            fi
+            echo "OK: $file"
+          done
 
       - name: Upload generated .ics file (L5)
         uses: actions/upload-artifact@v4
@@ -43,13 +52,13 @@ jobs:
           name: iCal-Output-PH
           path: Booked_PH.ics
 
-      - name: Upload generated .ics file (Public_PH.ics)
+      - name: Upload generated .ics file (Public_PH)
         uses: actions/upload-artifact@v4
         with:
           name: iCal-public_Output-PH
           path: Public_PH.ics
 
-      - name: Upload generated .ics file (Public_L5.ics)
+      - name: Upload generated .ics file (Public_L5)
         uses: actions/upload-artifact@v4
         with:
           name: iCal-Public_Output-L5
@@ -59,6 +68,12 @@ jobs:
         run: |
           git config user.name "github-actions"
           git config user.email "github-actions@github.com"
+
           git add Booked_L5.ics Booked_PH.ics Public_PH.ics Public_L5.ics
-          git commit -m "Update generated iCal files" || echo "No changes to commit"
-          git push
+
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "Update generated iCal files"
+            git push
+          fi
