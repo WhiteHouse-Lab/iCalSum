@@ -15,7 +15,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Set up Python
         uses: actions/setup-python@v6
@@ -41,25 +41,25 @@ jobs:
           done
 
       - name: Upload generated .ics file (L5)
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: iCal-Output-L5
           path: Booked_L5.ics
 
       - name: Upload generated .ics file (PH)
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: iCal-Output-PH
           path: Booked_PH.ics
 
       - name: Upload generated .ics file (Public_PH)
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: iCal-public_Output-PH
           path: Public_PH.ics
 
       - name: Upload generated .ics file (Public_L5)
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: iCal-Public_Output-L5
           path: Public_L5.ics
